@@ -87,7 +87,7 @@ map <F9> :NERDTree<CR>
  set wildmode=list:full
  set wildmenu
 imap jj <esc>
-"imap kk <esc>:q!
+imap kk <esc>:q!
 
 colorscheme desert
 set foldmethod=manual
