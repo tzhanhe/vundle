@@ -43,48 +43,172 @@
    Put this at the top of your `.vimrc` to use Vundle. Remove plugins you don't need, they are for illustration purposes.
 
    ```vim
-   set nocompatible              " be iMproved, required
-   filetype off                  " required
+set backspace=indent,eol,start
+set number
+set hlsearch
+set tabstop=4
+colorscheme desert "配色方案 "
+set background=dark
+"set softtabstop=4
+set shiftwidth=4
+set autoindent
+set cindent
+set showmatch
+set smartindent
+set laststatus=2
+set ignorecase
+set smartcase
+set autoread
+set incsearch
+set fileencodings=utf-8,gbk
+set whichwrap=b,s,<,>,[,]  "让退格，空格，上下箭头遇到行首行尾时自动移到下一行（包括insert模式）
+"插入模式下移动
+"inoremap <c-j> <down>
+"inoremap <c-k> <up>
+"inoremap <c-l> <right>
+"inoremap <c-h> <left>
+"===================================================
+"修改leader键为逗号
+let mapleader=","
+"tab切换
+nnoremap <leader>t gt
+nnoremap <leader>r gT
+"使用<leader>空格来取消搜索高亮
+nnoremap <leader><space> :noh<cr>
+"html中的js加注释 取消注释
+nmap <leader>h I//jj
+nmap <leader>ch ^xx
+nmap <silent> <leader>t :NERDTree<cr>
+"快捷键添加"
+map ,, :FufCoverageFile<cr>
+let g:fuf_coveragefile_globPatterns=['**/*.erb','**/*.rb','**/*.yml']
+map <F9> :NERDTree<CR>
+" 命令行下按tab键自动完成
+ set wildmode=list:full
+ set wildmenu
+imap jj <esc>
+"imap kk <esc>:q!
 
-   " set the runtime path to include Vundle and initialize
-   set rtp+=~/.vim/bundle/Vundle.vim
-   call vundle#begin()
-   " alternatively, pass a path where Vundle should install plugins
-   "call vundle#begin('~/some/path/here')
+colorscheme desert
+set foldmethod=manual
+"powerline{
+set guifont=PowerlineSymbols\ for\ Powerline
+set t_Co=256
+let g:Powerline_symbols = 'fancy'
+"}
+"vundle{
+filetype off        " required!
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+nmap <F8> :TagbarToggle<CR>
+"使用<leader>空格来取消搜索高亮
+nnoremap <leader><space> :noh<cr>
+set wildignore+=*.so,*.swp,*.zip,*/.svn/*
 
-   " let Vundle manage Vundle, required
-   Plugin 'gmarik/Vundle.vim'
+"ycm{"
+let g:ctrlp_working_path_mode = 'rw'
+let g:ycm_semantic_triggers =  {
+  		\   'c' : ['->', '.'],
+			\   'objc' : ['->', '.'],
+			\   'cpp,objcpp' : ['->', '.', '::'],
+			\   'perl' : ['->'],
+			\   'php' : ['->', '::'],
+			\   'cs,java,javascript,d,vim,ruby,python,perl6,scala,vb,elixir,go' : ['.'],
+			\   'lua' : ['.', ':'],
+			\   'erlang' : [':'],
+			\ }
+let g:ycm_filetype_blacklist = {
+			\ 'notes' : 1,
+			\ 'markdown' : 1,
+			\ 'text' : 1,
+			\}
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>','<Enter>']
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_confirm_extra_conf = 0
+"}
 
-   " The following are examples of different formats supported.
-   " Keep Plugin commands between vundle#begin/end.
-   " plugin on GitHub repo
-   Plugin 'tpope/vim-fugitive'
-   " plugin from http://vim-scripts.org/vim/scripts.html
-   Plugin 'L9'
-   " Git plugin not hosted on GitHub
-   Plugin 'git://git.wincent.com/command-t.git'
-   " git repos on your local machine (i.e. when working on your own plugin)
-   Plugin 'file:///home/gmarik/path/to/plugin'
-   " The sparkup vim script is in a subdirectory of this repo called vim.
-   " Pass the path to set the runtimepath properly.
-   Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-   " Avoid a name conflict with L9
-   Plugin 'user/L9', {'name': 'newL9'}
+"#相较于Command-T等查找文件的插件，ctrlp.vim最大的好处在于没有依赖，干净利落
+Bundle 'kien/ctrlp.vim'
+"#在输入()，""等需要配对的符号时，自动帮你补全剩余半个
+Bundle 'AutoClose'
+"#神级插件，ZenCoding可以让你以一种神奇而无比爽快的感觉写HTML、CSS
+Bundle 'ZenCoding.vim'
+"#在()、""、甚至HTML标签之间快速跳转；
+Bundle 'matchit.zip'
+"#显示行末的空格；
+Bundle 'ShowTrailingWhitespace'
+"#JS代码格式化插件；
+Bundle '_jsbeautify'
+"#用全新的方式在文档中高效的移动光标，革命性的突破
+Bundle 'EasyMotion'
+let g:EasyMotion_leader_key = '<Leader><Leader>'
+let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
+let g:EasyMotion_grouping = '2'
+"#自动识别文件编码；
+Bundle 'FencView.vim'
+"#必不可少，在VIM的编辑窗口树状显示文件目录
+Bundle 'The-NERD-tree'
+"#NERD出品的快速给代码加注释插件，选中，`ctrl+h`即可注释多种语言代码；
+Bundle 'The-NERD-Commenter'
+let NERDShutUp=1
+"支持单行和多行的选择，//格式
+map <c-h> ,c<space>
+"#解放生产力的神器，简单配置，就可以按照自己的风格快速输入大段代码。
+Bundle 'UltiSnips'
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"#让代码更加易于纵向排版，以=或,符号对齐
+Bundle 'Tabular'
+"#迄今位置最好的自动VIM自动补全插件了吧
+"#Vundle的这个写法，是直接取该插件在Github上的repo
+"Bundle 'Valloric/YouCompleteMe'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'majutsushi/tagbar'
+"Bundle 'scrooloose/syntastic'
+Bundle 'vim-scripts/VisIncr'
+Bundle 'tpope/vim-rails'
+Bundle 'othree/xml.vim'
+Bundle 'rodjek/vim-puppet'
+Bundle 'godlygeek/tabular'
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+Bundle 'scrooloose/nerdtree'
 
-   " All of your Plugins must be added before the following line
-   call vundle#end()            " required
-   filetype plugin indent on    " required
-   " To ignore plugin indent changes, instead use:
-   "filetype plugin on
-   "
-   " Brief help
-   " :PluginList       - lists configured plugins
-   " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-   " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-   " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-   "
-   " see :h vundle for more details or wiki for FAQ
-   " Put your non-Plugin stuff after this line
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "honza/vim-snippets"
+Bundle "jQuery"
+Bundle 'JavaScript-syntax'
+Bundle 'othree/html5.vim'
+Bundle 'groenewege/vim-less'
+Bundle 'Markdown'
+Bundle 'Markdown-syntax'
+Bundle 'winmanager'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'taglist.vim'
+Bundle 'fholgado/minibufexpl.vim'
+"Bundle 'spf13/snipmate-snippets'
+Bundle 'pangloss/vim-javascript'
+"放置在Bundle的设置后，防止意外BUG"
+filetype plugin indent on
+syntax on
+function! TwoSpace()
+	setlocal tabstop=2
+  setlocal shiftwidth=2
+endfunction
+au FileType ruby call TwoSpace()
+au FileType coffee call TwoSpace()
+au FileType vim call TwoSpace()
+au FileType eruby call TwoSpace()
+" HAML hax {{{
+" Haml likes indents of 2 spaces, just like our ruby.
+au FileType haml call TwoSpace()
+" }}}
    ```
 
 4. Install Plugins:
