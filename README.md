@@ -80,14 +80,14 @@ nmap <leader>h I//jj
 nmap <leader>ch ^xx
 nmap <silent> <leader>t :NERDTree<cr>
 "快捷键添加"
-map ,, :FufCoverageFile<cr>
+map \\ :FufCoverageFile<cr>
 let g:fuf_coveragefile_globPatterns=['**/*.erb','**/*.rb','**/*.yml']
 map <F9> :NERDTree<CR>
 " 命令行下按tab键自动完成
  set wildmode=list:full
  set wildmenu
 imap jj <esc>
-imap kk <esc>:q!
+imap kk <esc>:w!
 
 colorscheme desert
 set foldmethod=manual
@@ -135,7 +135,7 @@ Bundle 'kien/ctrlp.vim'
 "#在输入()，""等需要配对的符号时，自动帮你补全剩余半个
 Bundle 'AutoClose'
 "#神级插件，ZenCoding可以让你以一种神奇而无比爽快的感觉写HTML、CSS
-Bundle 'ZenCoding.vim'
+"Bundle 'ZenCoding.vim'
 "#在()、""、甚至HTML标签之间快速跳转；
 Bundle 'matchit.zip'
 "#显示行末的空格；
@@ -194,6 +194,7 @@ Bundle 'taglist.vim'
 Bundle 'fholgado/minibufexpl.vim'
 "Bundle 'spf13/snipmate-snippets'
 Bundle 'pangloss/vim-javascript'
+Bundle 'mattn/emmet-vim'
 "放置在Bundle的设置后，防止意外BUG"
 filetype plugin indent on
 syntax on
