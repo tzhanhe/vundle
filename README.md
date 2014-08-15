@@ -44,6 +44,7 @@
 
    ```vim
 set backspace=indent,eol,start
+set autowriteall
 set number
 set hlsearch
 set tabstop=4
